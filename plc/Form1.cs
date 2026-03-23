@@ -41,20 +41,7 @@ namespace PLC
 
         private void btnRead_Click(object sender, EventArgs e)
         {
-            string address = textReadValue.Text.Trim();
 
-            // 3. PLC에서 읽기
-            OperateResult<short> readResult = _plc.ReadInt16(address);
-
-            // 4. 결과 확인
-            if (readResult.IsSuccess)
-            {
-                textBox1.Text = readResult.Content.ToString();
-            }
-            else
-            {
-                MessageBox.Show("읽기 실패: " + readResult.Message);
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
