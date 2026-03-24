@@ -41,10 +41,16 @@ namespace PLC
 
         private void btnWrite_Click(object sender, EventArgs e)
         {
-            var result = _plc.Write(textWriteValue.Text, short.Parse(textBox2.Text));
+            byte[] data = Encoding.ASCII.GetBytes(textBox2.Text.Trim());
+            string hex = BitConverter.ToString(data);
+            MessageBox.Show("넣는 값 => " + hex);
+
+            var result = _plc.Write(textWriteValue.Text.Trim(), data);
+
+
             if (result.IsSuccess)
             {
-                MessageBox.Show("저장 성공 => "+ textWriteValue.Text + ", "+ textBox2.Text);
+                MessageBox.Show("저장 성공 => " + textWriteValue.Text + ", " + textBox2.Text);
                 System.Diagnostics.Debug.WriteLine("저장 성공 => " + textWriteValue.Text + ", " + textBox2.Text);
             }
             else
@@ -57,19 +63,24 @@ namespace PLC
         private void btnRead_Click(object sender, EventArgs e)
         {
             String adress  = textReadValue.Text.Trim();
-            var readResult = _plc.Read(adress, 10);
+            var readResult = _plc.Read(adress, 5);
 
             if (readResult.IsSuccess)
             {
+                // 읽은 데이터를 바이트 배열로 가져오기
                 byte[] data = readResult.Content;
+                // 바이트 배열을 ASCII 문자열로 변환
                 string text = System.Text.Encoding.ASCII.GetString(data);
 
                 textBox1.Text = text;
-                //System.Diagnostics.Debug.WriteLine(data);
+
+                // BitConverter.ToString(data)는 바이트 배열을 16진수 문자열로 변환합니다.
                 textBox3.Text = "Bytes (hex): " + BitConverter.ToString(data);
                 System.Diagnostics.Debug.WriteLine("Bytes (hex): " + BitConverter.ToString(data));
 
+                // 바이트 배열을 10진수 문자열로 변환
                 textBox4.Text = "Bytes (dec): " + string.Join(",", data);
+                // string.Join(",", data)는 바이트 배열의 각 요소를 10진수로 변환하여 쉼표로 구분된 문자열로 만듭니다.
                 System.Diagnostics.Debug.WriteLine("Bytes (dec): " + string.Join(",", data));
 
                 System.Diagnostics.Debug.WriteLine(text);
@@ -78,10 +89,9 @@ namespace PLC
             {
                 MessageBox.Show("읽기 실패: " + readResult.Message);
             }
-
-            //System.Diagnostics.Debug.WriteLine(data);
-
         }
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
