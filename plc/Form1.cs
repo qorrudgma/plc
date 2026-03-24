@@ -18,7 +18,6 @@ namespace PLC
             InitializeComponent();
 
         }
-
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -39,8 +38,28 @@ namespace PLC
 
         }
 
+        private void btnWrite_Click(object sender, EventArgs e)
+        {
+            var result = _plc.Write(textWriteValue.Text, short.Parse(textBox2.Text));
+            if (result.IsSuccess)
+            {
+                MessageBox.Show("저장 성공 => "+ textWriteValue.Text + ", "+ textBox2.Text);
+                System.Diagnostics.Debug.WriteLine("저장 성공 => " + textWriteValue.Text + ", " + textBox2.Text);
+            }
+            else
+            {
+                MessageBox.Show("저장 실패 : " + result.Message);
+                System.Diagnostics.Debug.WriteLine("저장 실패 : " + result.Message);
+            }
+        }
+
         private void btnRead_Click(object sender, EventArgs e)
         {
+            String adress  = textReadValue.Text.Trim();
+            var readResult = _plc.ReadInt16(adress);
+            String strReadResult = readResult.Content.ToString();
+            textBox1.Text = strReadResult;
+            System.Diagnostics.Debug.WriteLine(strReadResult);
 
         }
 
@@ -60,10 +79,12 @@ namespace PLC
             if (result.IsSuccess)
             {
                 MessageBox.Show("PLC 연결 성공");
+                System.Diagnostics.Debug.WriteLine("PLC 연결 성공");
             }
             else
             {
                 MessageBox.Show("PLC 연결 실패 : " + result.Message);
+                System.Diagnostics.Debug.WriteLine("PLC 연결 실패 : " + result.Message);
             }
         }
     }

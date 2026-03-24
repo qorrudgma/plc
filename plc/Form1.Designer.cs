@@ -39,9 +39,9 @@
             btnRead = new Button();
             textWriteTest = new TextBox();
             textWriteValue = new TextBox();
-            btnWrite = new Button();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
+            btnWrite = new Button();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -63,9 +63,9 @@
             tableLayoutPanel1.Controls.Add(btnRead, 2, 2);
             tableLayoutPanel1.Controls.Add(textWriteTest, 0, 4);
             tableLayoutPanel1.Controls.Add(textWriteValue, 1, 4);
-            tableLayoutPanel1.Controls.Add(btnWrite, 2, 4);
             tableLayoutPanel1.Controls.Add(textBox1, 0, 3);
             tableLayoutPanel1.Controls.Add(textBox2, 0, 5);
+            tableLayoutPanel1.Controls.Add(btnWrite, 2, 5);
             tableLayoutPanel1.Location = new Point(77, 43);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 6;
@@ -163,15 +163,6 @@
             textWriteValue.Size = new Size(88, 23);
             textWriteValue.TabIndex = 5;
             // 
-            // btnWrite
-            // 
-            btnWrite.Location = new Point(191, 231);
-            btnWrite.Name = "btnWrite";
-            btnWrite.Size = new Size(88, 23);
-            btnWrite.TabIndex = 10;
-            btnWrite.Text = "쓰기";
-            btnWrite.UseVisualStyleBackColor = true;
-            // 
             // textBox1
             // 
             tableLayoutPanel1.SetColumnSpan(textBox1, 3);
@@ -183,12 +174,22 @@
             // 
             // textBox2
             // 
-            tableLayoutPanel1.SetColumnSpan(textBox2, 3);
+            tableLayoutPanel1.SetColumnSpan(textBox2, 2);
             textBox2.Dock = DockStyle.Fill;
             textBox2.Location = new Point(3, 288);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(276, 23);
+            textBox2.Size = new Size(182, 23);
             textBox2.TabIndex = 12;
+            // 
+            // btnWrite
+            // 
+            btnWrite.Location = new Point(191, 288);
+            btnWrite.Name = "btnWrite";
+            btnWrite.Size = new Size(88, 23);
+            btnWrite.TabIndex = 10;
+            btnWrite.Text = "쓰기";
+            btnWrite.UseVisualStyleBackColor = true;
+            btnWrite.Click += btnWrite_Click;
             // 
             // Form1
             // 
