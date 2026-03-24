@@ -1,6 +1,7 @@
 using HslCommunication;
 using HslCommunication.Profinet.Melsec;
 using System;
+using System.Text;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -56,10 +57,29 @@ namespace PLC
         private void btnRead_Click(object sender, EventArgs e)
         {
             String adress  = textReadValue.Text.Trim();
-            var readResult = _plc.ReadInt16(adress);
-            String strReadResult = readResult.Content.ToString();
-            textBox1.Text = strReadResult;
-            System.Diagnostics.Debug.WriteLine(strReadResult);
+            var readResult = _plc.Read(adress, 10);
+
+            if (readResult.IsSuccess)
+            {
+                byte[] data = readResult.Content;
+                string text = System.Text.Encoding.ASCII.GetString(data);
+
+                textBox1.Text = text;
+                //System.Diagnostics.Debug.WriteLine(data);
+                textBox3.Text = "Bytes (hex): " + BitConverter.ToString(data);
+                System.Diagnostics.Debug.WriteLine("Bytes (hex): " + BitConverter.ToString(data));
+
+                textBox4.Text = "Bytes (dec): " + string.Join(",", data);
+                System.Diagnostics.Debug.WriteLine("Bytes (dec): " + string.Join(",", data));
+
+                System.Diagnostics.Debug.WriteLine(text);
+            }
+            else
+            {
+                MessageBox.Show("읽기 실패: " + readResult.Message);
+            }
+
+            //System.Diagnostics.Debug.WriteLine(data);
 
         }
 
