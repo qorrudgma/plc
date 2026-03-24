@@ -8,8 +8,6 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PLC
 
-    // git 테스트
-
 {
     public partial class Form1 : Form
     {
@@ -163,27 +161,88 @@ namespace PLC
                     return;
                 }
 
-                string request = "500000FF03FF000018001004010000D*0001000005";
-                byte[] requestBytes = Encoding.ASCII.GetBytes(request);
+                string requestHex = "500000FFFF03000C00100001040000640000A80500";
 
+                byte[] requestBytes = new byte[requestHex.Length / 2];
+                for (int i = 0; i < requestBytes.Length; i++)
+                {
+                    requestBytes[i] = Convert.ToByte(requestHex.Substring(i * 2, 2), 16);
+                }
+
+                // PLC로 전송
                 stream.Write(requestBytes, 0, requestBytes.Length);
                 stream.Flush();
 
+                // 응답 수신
                 byte[] buffer = new byte[1024];
                 int length = stream.Read(buffer, 0, buffer.Length);
 
-                string asciiResponse = Encoding.ASCII.GetString(buffer, 0, length);
-                string hexResponse = BitConverter.ToString(buffer, 0, length);
+                if (length <= 0)
+                {
+                    MessageBox.Show("응답이 없습니다.");
+                    return;
+                }
+
+                byte[] responseBytes = new byte[length];
+                Array.Copy(buffer, responseBytes, length);
+
+                string responseHex = BitConverter.ToString(responseBytes);
+                string responseAscii = Encoding.ASCII.GetString(responseBytes);
+
+                System.Diagnostics.Debug.WriteLine("요청 HEX : " + requestHex);
+                System.Diagnostics.Debug.WriteLine("수신 길이 : " + length);
+                System.Diagnostics.Debug.WriteLine("응답 HEX : " + responseHex);
+                System.Diagnostics.Debug.WriteLine("응답 ASCII : " + responseAscii);
+
+                // 최소 길이 확인
+                if (length < 11)
+                {
+                    MessageBox.Show(
+                        "응답 길이가 너무 짧습니다.\r\n" +
+                        "수신 길이: " + length + "\r\n" +
+                        "응답 HEX: " + responseHex
+                    );
+                    return;
+                }
+
+                // End Code 확인
+                ushort endCode = BitConverter.ToUInt16(responseBytes, 9);
+                if (endCode != 0x0000)
+                {
+                    MessageBox.Show(
+                        "PLC 에러 응답\r\n" +
+                        "EndCode: 0x" + endCode.ToString("X4") + "\r\n" +
+                        "응답 HEX: " + responseHex
+                    );
+                    return;
+                }
+
+                // 실제 데이터는 11바이트 이후
+                int dataStartIndex = 11;
+                int dataLength = length - dataStartIndex;
+
+                if (dataLength <= 0)
+                {
+                    MessageBox.Show("정상 응답이지만 데이터가 없습니다.");
+                    return;
+                }
+
+                byte[] dataBytes = new byte[dataLength];
+                Array.Copy(responseBytes, dataStartIndex, dataBytes, 0, dataLength);
+
+                string dataHex = BitConverter.ToString(dataBytes);
+                string dataAscii = Encoding.ASCII.GetString(dataBytes).TrimEnd('\0');
+
+                textBox3.Text = dataHex;
+                textBox5.Text = dataAscii;
 
                 MessageBox.Show(
-                    "수신 길이: " + length + "\n" +
-                    "ASCII: " + asciiResponse + "\n" +
-                    "HEX: " + hexResponse
+                    "요청 HEX: " + requestHex + "\r\n\r\n" +
+                    "수신 길이: " + length + "\r\n" +
+                    "전체 응답 HEX: " + responseHex + "\r\n\r\n" +
+                    "데이터 HEX: " + dataHex + "\r\n" +
+                    "데이터 ASCII: " + dataAscii
                 );
-
-                System.Diagnostics.Debug.WriteLine("수신 길이: " + length);
-                System.Diagnostics.Debug.WriteLine("ASCII 응답: " + asciiResponse);
-                System.Diagnostics.Debug.WriteLine("HEX 응답: " + hexResponse);
             }
             catch (Exception ex)
             {
