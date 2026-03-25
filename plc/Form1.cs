@@ -160,8 +160,42 @@ namespace PLC
                     MessageBox.Show("먼저 PLC 연결을 해주세요.");
                     return;
                 }
+                
+                // Subheader
+                // 데이터 형식
+                String subHeader = "5000";
 
-                string requestHex = "500000FFFF03000C00100001040000640000A80500";
+                // Access route
+                // network number
+                String networkNo = "00";
+                // PC number
+                String pcNo = "FF";
+                // I/O number
+                String IONo = "FF03";
+                // station number
+                String stationNo = "00";
+                // length
+                String dataLen = "0C00";
+                // timer
+                String timer = "1000";
+
+                // Request data
+                // command
+                String cmd = "0104"; // "0104" => read, "0114" => write
+                //subcommand
+                String subCmd = "0000";
+                // head device number
+                String hdNo = "640000";
+                // device code
+                String dCode = "A8"; // D = A8
+                // device point number
+                String devicePointNo = "0500";
+
+                //string requestHex = "500000FFFF03000C00100001040000640000A80500";
+                string requestHex = subHeader + networkNo + pcNo + IONo + stationNo + dataLen + timer + cmd + subCmd + hdNo + dCode + devicePointNo;
+                //string requestHex = subHeader + networkNo + pcNo + IONo + stationNo + dataLen + timer + cmd + subCmd + dCode + hdNo + devicePointNo;
+                System.Diagnostics.Debug.WriteLine(requestHex);
+
 
                 byte[] requestBytes = new byte[requestHex.Length / 2];
                 for (int i = 0; i < requestBytes.Length; i++)
@@ -176,6 +210,13 @@ namespace PLC
                 // 응답 수신
                 byte[] buffer = new byte[1024];
                 int length = stream.Read(buffer, 0, buffer.Length);
+
+                // end code
+                // 코드 | 의미
+                // C051 | 주소 범위 오류
+                // C052 | 디바이스 지정 오류
+                // C054 | 읽기 길이 오류
+                // C059 | 지원 안 되는 명령
 
                 if (length <= 0)
                 {

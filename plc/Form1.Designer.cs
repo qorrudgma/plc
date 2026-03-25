@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             tableLayoutPanel1 = new TableLayoutPanel();
+            textBox7 = new TextBox();
             textBox4 = new TextBox();
             textIPValue = new TextBox();
             textIP = new TextBox();
@@ -47,7 +48,10 @@
             button2 = new Button();
             textBox5 = new TextBox();
             button3 = new Button();
+            textBox6 = new TextBox();
+            tableLayoutPanel2 = new TableLayoutPanel();
             tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -58,6 +62,7 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 119F));
+            tableLayoutPanel1.Controls.Add(textBox7, 2, 3);
             tableLayoutPanel1.Controls.Add(textBox4, 0, 3);
             tableLayoutPanel1.Controls.Add(textIPValue, 1, 0);
             tableLayoutPanel1.Controls.Add(textIP, 0, 0);
@@ -75,8 +80,8 @@
             tableLayoutPanel1.Controls.Add(textBox3, 0, 4);
             tableLayoutPanel1.Controls.Add(button2, 3, 4);
             tableLayoutPanel1.Controls.Add(textBox5, 0, 5);
-            tableLayoutPanel1.Controls.Add(button3, 3, 5);
-            tableLayoutPanel1.Location = new Point(77, 25);
+            tableLayoutPanel1.Controls.Add(textBox6, 1, 3);
+            tableLayoutPanel1.Location = new Point(12, 12);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 6;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
@@ -85,13 +90,20 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(649, 413);
+            tableLayoutPanel1.Size = new Size(545, 213);
             tableLayoutPanel1.TabIndex = 0;
             tableLayoutPanel1.Paint += tableLayoutPanel1_Paint;
             // 
+            // textBox7
+            // 
+            textBox7.Location = new Point(215, 108);
+            textBox7.Name = "textBox7";
+            textBox7.Size = new Size(100, 23);
+            textBox7.TabIndex = 19;
+            // 
             // textBox4
             // 
-            textBox4.Location = new Point(3, 207);
+            textBox4.Location = new Point(3, 108);
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(88, 23);
             textBox4.TabIndex = 14;
@@ -99,7 +111,7 @@
             // 
             // textIPValue
             // 
-            textIPValue.Location = new Point(135, 3);
+            textIPValue.Location = new Point(109, 3);
             textIPValue.Name = "textIPValue";
             textIPValue.Size = new Size(88, 23);
             textIPValue.TabIndex = 6;
@@ -116,7 +128,7 @@
             // 
             // textPort
             // 
-            textPort.Location = new Point(267, 3);
+            textPort.Location = new Point(215, 3);
             textPort.Name = "textPort";
             textPort.Size = new Size(88, 23);
             textPort.TabIndex = 1;
@@ -125,7 +137,7 @@
             // 
             // textPortValue
             // 
-            textPortValue.Location = new Point(399, 3);
+            textPortValue.Location = new Point(321, 3);
             textPortValue.Name = "textPortValue";
             textPortValue.Size = new Size(88, 23);
             textPortValue.TabIndex = 7;
@@ -133,7 +145,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(531, 3);
+            button1.Location = new Point(427, 3);
             button1.Name = "button1";
             button1.Size = new Size(88, 23);
             button1.TabIndex = 8;
@@ -143,7 +155,7 @@
             // 
             // textReadTest
             // 
-            textReadTest.Location = new Point(3, 71);
+            textReadTest.Location = new Point(3, 38);
             textReadTest.Name = "textReadTest";
             textReadTest.Size = new Size(88, 23);
             textReadTest.TabIndex = 2;
@@ -151,14 +163,14 @@
             // 
             // textReadValue
             // 
-            textReadValue.Location = new Point(135, 71);
+            textReadValue.Location = new Point(109, 38);
             textReadValue.Name = "textReadValue";
             textReadValue.Size = new Size(88, 23);
             textReadValue.TabIndex = 4;
             // 
             // btnRead
             // 
-            btnRead.Location = new Point(267, 71);
+            btnRead.Location = new Point(215, 38);
             btnRead.Name = "btnRead";
             btnRead.Size = new Size(88, 23);
             btnRead.TabIndex = 9;
@@ -170,14 +182,14 @@
             // 
             tableLayoutPanel1.SetColumnSpan(textBox1, 2);
             textBox1.Dock = DockStyle.Fill;
-            textBox1.Location = new Point(399, 71);
+            textBox1.Location = new Point(321, 38);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(247, 23);
+            textBox1.Size = new Size(221, 23);
             textBox1.TabIndex = 11;
             // 
             // textWriteTest
             // 
-            textWriteTest.Location = new Point(3, 139);
+            textWriteTest.Location = new Point(3, 73);
             textWriteTest.Name = "textWriteTest";
             textWriteTest.Size = new Size(88, 23);
             textWriteTest.TabIndex = 3;
@@ -185,14 +197,14 @@
             // 
             // textWriteValue
             // 
-            textWriteValue.Location = new Point(135, 139);
+            textWriteValue.Location = new Point(109, 73);
             textWriteValue.Name = "textWriteValue";
             textWriteValue.Size = new Size(88, 23);
             textWriteValue.TabIndex = 5;
             // 
             // btnWrite
             // 
-            btnWrite.Location = new Point(531, 139);
+            btnWrite.Location = new Point(427, 73);
             btnWrite.Name = "btnWrite";
             btnWrite.Size = new Size(88, 23);
             btnWrite.TabIndex = 10;
@@ -203,23 +215,23 @@
             // textBox2
             // 
             tableLayoutPanel1.SetColumnSpan(textBox2, 2);
-            textBox2.Location = new Point(267, 139);
+            textBox2.Location = new Point(215, 73);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(258, 23);
+            textBox2.Size = new Size(206, 23);
             textBox2.TabIndex = 12;
             // 
             // textBox3
             // 
             tableLayoutPanel1.SetColumnSpan(textBox3, 3);
             textBox3.Dock = DockStyle.Fill;
-            textBox3.Location = new Point(3, 275);
+            textBox3.Location = new Point(3, 143);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(390, 23);
+            textBox3.Size = new Size(312, 23);
             textBox3.TabIndex = 13;
             // 
             // button2
             // 
-            button2.Location = new Point(399, 275);
+            button2.Location = new Point(321, 143);
             button2.Name = "button2";
             button2.Size = new Size(88, 23);
             button2.TabIndex = 15;
@@ -231,14 +243,14 @@
             // 
             tableLayoutPanel1.SetColumnSpan(textBox5, 3);
             textBox5.Dock = DockStyle.Fill;
-            textBox5.Location = new Point(3, 343);
+            textBox5.Location = new Point(3, 178);
             textBox5.Name = "textBox5";
-            textBox5.Size = new Size(390, 23);
+            textBox5.Size = new Size(312, 23);
             textBox5.TabIndex = 16;
             // 
             // button3
             // 
-            button3.Location = new Point(399, 343);
+            button3.Location = new Point(235, 3);
             button3.Name = "button3";
             button3.Size = new Size(88, 23);
             button3.TabIndex = 17;
@@ -246,16 +258,40 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // textBox6
+            // 
+            textBox6.Location = new Point(109, 108);
+            textBox6.Name = "textBox6";
+            textBox6.Size = new Size(100, 23);
+            textBox6.TabIndex = 18;
+            // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.ColumnCount = 3;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 106F));
+            tableLayoutPanel2.Controls.Add(button3, 2, 0);
+            tableLayoutPanel2.Location = new Point(15, 231);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 2;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Size = new Size(339, 109);
+            tableLayoutPanel2.TabIndex = 1;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(tableLayoutPanel2);
             Controls.Add(tableLayoutPanel1);
             Name = "Form1";
             Text = "Form1";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
+            tableLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -280,5 +316,8 @@
         private TextBox textBox3;
         private Button button2;
         private Button button3;
+        private TextBox textBox7;
+        private TextBox textBox6;
+        private TableLayoutPanel tableLayoutPanel2;
     }
 }
